@@ -10,7 +10,7 @@ export const MESSAGE_TYPE = {
 };
 
 export const HEADER_TITLES = {
-  HOME: 'Chat Room App',
+  HOME: 'Home',
   CREATE_ROOM: 'Create room',
   ROOMS: 'My rooms',
   USERS: 'View Users'

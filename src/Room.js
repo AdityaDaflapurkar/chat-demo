@@ -7,7 +7,7 @@ import { MESSAGE_STATUS, MESSAGE_TYPE } from './constants';
 
 const ENDPOINT = 'http://127.0.0.1:3001';
 const socket = socketIOClient(ENDPOINT);
-class Home extends React.Component {
+class Room extends React.Component {
   state = {
     messageHistory: [],
     src: '',
@@ -128,4 +128,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Room;

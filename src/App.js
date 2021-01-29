@@ -1,5 +1,5 @@
 import './App.css';
-import Home from './Home';
+import Welcome from './Welcome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route } from 'react-router-dom';
 import React from 'react';
@@ -44,7 +44,7 @@ class App extends React.Component {
       <Route path="/rooms" component={RoomList}/>
       <Route path="/users" component={UserList}/>
       {/* <Route path="/create-room" component={Home}/> */}
-      <Route path="/" exact component={Home}/>
+      <Route path="/" exact component={Welcome}/>
       
       {/* <UserInfo /> */}
       {/* <UserList /> */}
