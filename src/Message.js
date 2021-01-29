@@ -42,7 +42,7 @@ export default function Message(props) {
             </div>
             {/* props.text */}
             {props.src !== '' ? (
-              <img src={props.src} style={{ width: 250, height: 150 }} />
+              <img src={props.src} alt='message' style={{ width: 250, height: 150 }} />
             ) : (
               ''
             )}

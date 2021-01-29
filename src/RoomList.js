@@ -3,7 +3,8 @@ import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,12 +20,28 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RoomList(props) {
   const classes = useStyles();
-  console.log(props);
+
+  const [listLoading, setListLoading] = useState(false)
+  const [rooms, setRooms] = useState([])
+
+  useEffect(() => {
+    setListLoading(true)
+    axios.get('http://localhost:5000/rooms').then(res => {
+      console.log(res, 'res')
+      setRooms(res.data)
+      setListLoading(false)
+    }).catch(err => {
+      setListLoading(false)
+      console.log(err, 'x')
+    })
+  }, [])
+  
   return (
     <List className={classes.root}>
+      {rooms.map(room => <>
       <ListItem alignItems="flex-start">
         <ListItemText
-          primary="Brunch this weekend?"
+          primary={room.title}
           secondary={
             <>
               <Typography
@@ -33,32 +50,15 @@ export default function RoomList(props) {
                 className={classes.inline}
                 color="textPrimary"
               >
-                Ali Connors
+                {room.created_by}
               </Typography>
-              {" — I'll be in your neighborhood doing errands this…"}
+              {'- '} {room.create_date}
             </>
           }
         />
-      </ListItem>
-      <Divider />
-      <ListItem alignItems="flex-start">
-        <ListItemText
-          primary="Brunch this weekend?"
-          secondary={
-            <>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Ali Connors
-              </Typography>
-              {" — I'll be in your neighborhood doing errands this…"}
-            </>
-          }
-        />
-      </ListItem>
-    </List>
+      
+      </ListItem><Divider/></>) 
+}
+          </List>
   );
 }
