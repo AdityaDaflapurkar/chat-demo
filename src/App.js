@@ -6,9 +6,11 @@ import React from 'react';
 // import SignUp from './SignUp';
 // import Login from './Login';
 import { UserList } from './UserList';
+import { UserInfo } from './UserInfo';
 import Header from './Header';
 import SideMenu from './SideMenu';
 import RoomList from './RoomList';
+import CreateRoom from './CreateRoom';
 import { HEADER_TITLES } from './constants';
 
 class App extends React.Component {
@@ -42,12 +44,10 @@ class App extends React.Component {
       <Header openSideMenu={this.openSideMenu} title={headerTitle}/>
       {isSideMenuOpened ? <SideMenu close={this.closeSideMenu} setHeaderTitle={this.setHeaderTitle} /> : ''}
       <Route path="/rooms" component={RoomList}/>
-      <Route path="/users" component={UserList}/>
-      {/* <Route path="/create-room" component={Home}/> */}
+      <Route path="/users" exact component={UserList}/>
+      <Route path="/users/:user_id" component={UserInfo}/>
+      <Route path="/create-room" component={CreateRoom}/>
       <Route path="/" exact component={Welcome}/>
-      
-      {/* <UserInfo /> */}
-      {/* <UserList /> */}
       {/* <SignUp /> */}
       {/*<Login />*/}
     </div>

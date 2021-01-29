@@ -8,6 +8,13 @@ const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 const User = require('../models/user.model');
 
+router.get('/:user_id', (req, res) => {
+  console.log(req.params.user_id)
+  User.findById(req.params.user_id)
+    .then((users) => res.json(users))
+    .catch((err) => res.status(400).json(`Error : ${err}`));
+});
+
 router.get('/', (req, res) => {
   User.find()
     .then((users) => res.json(users))

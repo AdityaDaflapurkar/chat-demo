@@ -1,8 +1,12 @@
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import axios from 'axios';
+import Divider from '@material-ui/core/Divider';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,13 +20,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function UserList(props) {
+  const [listLoading, setListLoading] = useState(false)
+  const [users, setUsers] = useState([])
   const classes = useStyles();
-  console.log(props);
+
+  useEffect(() => {
+    setListLoading(true)
+    axios.get('http://localhost:5000/users').then(res => {
+      console.log(res, 'res')
+      setUsers(res.data)
+      setListLoading(false)
+    }).catch(err => {
+      setListLoading(false)
+      console.log(err, 'x')
+    })
+  }, [])
+  
   return (
-    <List className={classes.root}>
-      <ListItem alignItems="flex-start">
-        <ListItemText primary="Brunch this weekend?" />
-      </ListItem>
-    </List>
+    <>{ listLoading ? <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}><CircularProgress /></div>
+    :(<List className={classes.root}>
+        {
+          users.map(user => (<><ListItem alignItems="flex-start" component={Link} to={'users/' + user._id} button={true}>
+            <ListItemText primary={user.name} />
+            </ListItem>
+            <Divider/></>))
+        }
+      
+    </List>)}</>
+
   );
 }
