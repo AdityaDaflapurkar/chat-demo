@@ -21,7 +21,7 @@ export default function Header(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6">Chat room</Typography>
+          <Typography variant="h6">{props.title}</Typography>
         </Toolbar>
       </AppBar>
     </>

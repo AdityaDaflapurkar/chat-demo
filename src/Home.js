@@ -2,14 +2,8 @@ import React from 'react';
 import socketIOClient from 'socket.io-client';
 // import Message from './Message';
 //import Footer from './Footer';
-import Header from './Header';
-import SideMenu from './SideMenu';
-//import RoomList from './RoomList';
 import { MESSAGE_STATUS, MESSAGE_TYPE } from './constants';
-//import SignUp from './SignUp';
-//import Login from './Login';
-import { UserInfo } from './UserInfo';
-import { UserList } from './UserList';
+
 
 const ENDPOINT = 'http://127.0.0.1:3001';
 const socket = socketIOClient(ENDPOINT);
@@ -17,7 +11,6 @@ class Home extends React.Component {
   state = {
     messageHistory: [],
     src: '',
-    isSideMenuOpened: false,
   };
 
   componentDidMount() {
@@ -104,25 +97,10 @@ class Home extends React.Component {
     );
   };
 
-  openSideMenu = () => {
-    this.setState({
-      isSideMenuOpened: true,
-    });
-  };
-
-  closeSideMenu = () => {
-    console.log('close');
-    this.setState({
-      isSideMenuOpened: false,
-    });
-  };
-
   render() {
-    const { isSideMenuOpened } = this.state;
+    
     return (
       <>
-        <Header openSideMenu={this.openSideMenu} />
-        {isSideMenuOpened ? <SideMenu close={this.closeSideMenu} /> : ''}
         {/*<RoomList />*/}
         {/* <div style={{ backgroundColor: '#eeeeee'}}>
             <div style={{ height: 50 }}>
@@ -144,10 +122,7 @@ class Home extends React.Component {
             </div>
             */}
         {/*<Footer sendMessage={this.sendMessage} setImage={this.setImage} />*/}
-        {/* <SignUp /> */}
-        {/*<Login />*/}
-        <UserInfo />
-        <UserList />
+        
       </>
     );
   }

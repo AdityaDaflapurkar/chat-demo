@@ -8,3 +8,10 @@ export const MESSAGE_TYPE = {
   IMAGE: 'image',
   TEXT: 'text',
 };
+
+export const HEADER_TITLES = {
+  HOME: 'Chat Room App',
+  CREATE_ROOM: 'Create room',
+  ROOMS: 'My rooms',
+  USERS: 'View Users'
+}
