@@ -3,8 +3,8 @@ import Welcome from './Welcome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route } from 'react-router-dom';
 import React from 'react';
-// import SignUp from './SignUp';
-// import Login from './Login';
+import SignUp from './SignUp';
+import Login from './Login';
 import { UserList } from './UserList';
 import { UserInfo } from './UserInfo';
 import Header from './Header';
@@ -48,8 +48,8 @@ class App extends React.Component {
       <Route path="/users/:user_id" component={UserInfo}/>
       <Route path="/create-room" component={CreateRoom}/>
       <Route path="/" exact component={Welcome}/>
-      {/* <SignUp /> */}
-      {/*<Login />*/}
+      <Route path="/signup" component={SignUp}/>
+      <Route path="/login" component={Login}/>
     </div>
   );
   }

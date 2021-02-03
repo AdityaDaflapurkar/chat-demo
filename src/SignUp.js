@@ -3,6 +3,7 @@ import Box from '@material-ui/core/Box';
 import { FormControl } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { useState } from 'react';
+import axios from 'axios';
 
 const HELPER_TEXTS = {
   USERNAME_NOT_EMPTY: 'Username cannot be empty',
@@ -113,6 +114,21 @@ export default function SignUp() {
     }
   };
 
+  const onClickRegister = () => {
+    console.log('xxx')
+    axios.post('http://localhost:5000/users/register', {
+      name: username,
+      email,
+      phone: contact,
+      password,
+      password2: passwordConfirm
+  }).then(res => {
+      console.log(res)
+    }).catch(e => {
+      console.log('hhh')
+    })
+  }
+
   return (
     <Box
       display="flex"
@@ -194,7 +210,7 @@ export default function SignUp() {
           width: 200,
         }}
       >
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={onClickRegister}>
           Register User
         </Button>
       </FormControl>

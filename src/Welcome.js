@@ -1,7 +1,8 @@
 import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import chats_logo from './imgs/chats_logo.png'
+import chats_logo from './imgs/chats_logo.png';
+import { Link } from 'react-router-dom';
 export default function Welcome() {
     
     return (<Box display='flex' flexDirection='column' bgcolor="background.paper" m={2} p={5}>
@@ -13,8 +14,14 @@ export default function Welcome() {
             <img src={chats_logo} alt="chats" style={{width: '25%', height:'25%', minWidth: 250, minHeight: 250}}/>
         </Box>
         <hr></hr>
-    <Box display='flex' flexDirection='row' justifyContent="center"><Button variant="contained" color="primary" style={{width:200}}>Login</Button>
+    <Box display='flex' flexDirection='row' justifyContent="center">
+    <Link to='/login'>
+        <Button variant="contained" color="primary" style={{width:200}}>Login</Button>
+        </Link>
     &nbsp;&nbsp;
-    <Button variant="contained" color="secondary" style={{width:200}}>Sign Up</Button></Box>
+    <Link to='/signup'>
+    <Button variant="contained" color="secondary" style={{width:200}}>Sign Up</Button>
+    </Link>
+    </Box>
     </Box>)
 }
