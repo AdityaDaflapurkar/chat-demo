@@ -1,3 +1,4 @@
+import React from 'react'
 export const MESSAGE_STATUS = {
   SENDING: 'sending',
   SENT: 'sent',
@@ -15,3 +16,4 @@ export const HEADER_TITLES = {
   ROOMS: 'My rooms',
   USERS: 'View Users'
 }
+export const AppContext = React.createContext({});

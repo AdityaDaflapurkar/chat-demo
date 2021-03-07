@@ -34,7 +34,7 @@ class Room extends React.Component {
   }
 
   scrollToBottom = () => {
-    this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+    this.messagesEnd.scrollIntoView();
   };
 
   onTypingStart = () => {
@@ -98,12 +98,9 @@ class Room extends React.Component {
   };
 
   render() {
-    
     return (
       <>
         <div style={{ backgroundColor: '#eeeeee'}}>
-            <div style={{ height: 50 }}>
-            </div>
                 {this.state.messageHistory.map(message =>
                     <Message 
                         text={message.text}

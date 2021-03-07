@@ -9,7 +9,7 @@ import SignoutIcon from '@material-ui/icons/ExitToApp';
 export default function Header(props) {
   return (
     <>
-      <AppBar style={{ backgroundColor: 'black' }} position="static">
+      <AppBar style={{ backgroundColor: 'black' }} position="sticky">
         <Toolbar>
           <IconButton
             edge="start"

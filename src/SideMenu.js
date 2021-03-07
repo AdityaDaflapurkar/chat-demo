@@ -2,7 +2,7 @@ import './SideMenu.css';
 import React from 'react';
 import { NavLink } from 'react-router-dom'
 import OutsideClickHandler from 'react-outside-click-handler';
-import { HEADER_TITLES } from './constants';
+import { HEADER_TITLES, AppContext } from './constants';
 
 const navLinks = [
   { url: '/', name: HEADER_TITLES.HOME, key: 1, },
@@ -12,7 +12,7 @@ const navLinks = [
 ];
 
 export default class SideMenu extends React.Component {
-  
+  static contextType = AppContext
   render() {
     return (
       <OutsideClickHandler
@@ -23,13 +23,13 @@ export default class SideMenu extends React.Component {
         <div
           className="menu active"
           onBlur={this.props.close}
-          style={{ zIndex: 10 }}
+          style={{ zIndex: 10, position: 'fixed' }}
         >
           <ul>
             {navLinks.map(({ url, name, key, }) => (
               <li key={key}>
                 <NavLink to={url} exact activeStyle={{backgroundColor: '#add2f7'}} onClick={() => 
-                  this.props.setHeaderTitle(name)
+                  this.context.setHeaderTitle(name)
                   }>{name}</NavLink>
               </li>
             ))}

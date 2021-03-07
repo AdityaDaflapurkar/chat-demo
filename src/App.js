@@ -12,7 +12,7 @@ import SideMenu from './SideMenu';
 import RoomList from './RoomList';
 import CreateRoom from './CreateRoom';
 import Room from './Room';
-import { HEADER_TITLES } from './constants';
+import { HEADER_TITLES, AppContext } from './constants';
 
 class App extends React.Component {
   state = {
@@ -41,9 +41,10 @@ class App extends React.Component {
   render() {
     const { isSideMenuOpened, headerTitle } = this.state;
   return (
-    <div className="App">
+    <div className="App"> 
       <Header openSideMenu={this.openSideMenu} title={headerTitle}/>
-      {isSideMenuOpened ? <SideMenu close={this.closeSideMenu} setHeaderTitle={this.setHeaderTitle} /> : ''}
+      <AppContext.Provider value={{setHeaderTitle: this.setHeaderTitle}}>
+      {isSideMenuOpened ? <SideMenu close={this.closeSideMenu} /> : ''}
       <Route path="/users" exact component={UserList}/>
       <Route path="/users/:user_id" component={UserInfo}/>
       <Route path="/rooms/:room_id" component={Room}/>
@@ -52,6 +53,7 @@ class App extends React.Component {
       <Route path="/" exact component={Welcome}/>
       <Route path="/signup" component={SignUp}/>
       <Route path="/login" component={Login}/>
+      </AppContext.Provider>
     </div>
   );
   }
