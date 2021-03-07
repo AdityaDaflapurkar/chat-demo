@@ -1,7 +1,7 @@
 import React from 'react';
 import socketIOClient from 'socket.io-client';
-// import Message from './Message';
-//import Footer from './Footer';
+import Message from './Message';
+import Footer from './Footer';
 import { MESSAGE_STATUS, MESSAGE_TYPE } from './constants';
 
 
@@ -101,18 +101,17 @@ class Room extends React.Component {
     
     return (
       <>
-        {/*<RoomList />*/}
-        {/* <div style={{ backgroundColor: '#eeeeee'}}>
+        <div style={{ backgroundColor: '#eeeeee'}}>
             <div style={{ height: 50 }}>
             </div>
-                {messageHistory.map(message =>
+                {this.state.messageHistory.map(message =>
                     <Message 
                         text={message.text}
                         sentBy={message.sentBy}
                         sentDate={message.sentDate}
                         status={message.status}
                         type={message.type}
-                        src={src}
+                        //src={src}
                     />
                     )
                 }
@@ -120,8 +119,7 @@ class Room extends React.Component {
             <div style={{ float:"left", clear: "both", paddingBottom: 60 }}
              ref={(el) => { this.messagesEnd = el; }}>
             </div>
-            */}
-        {/*<Footer sendMessage={this.sendMessage} setImage={this.setImage} />*/}
+        <Footer sendMessage={this.sendMessage} setImage={this.setImage} />
         
       </>
     );

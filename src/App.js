@@ -11,6 +11,7 @@ import Header from './Header';
 import SideMenu from './SideMenu';
 import RoomList from './RoomList';
 import CreateRoom from './CreateRoom';
+import Room from './Room';
 import { HEADER_TITLES } from './constants';
 
 class App extends React.Component {
@@ -43,9 +44,10 @@ class App extends React.Component {
     <div className="App">
       <Header openSideMenu={this.openSideMenu} title={headerTitle}/>
       {isSideMenuOpened ? <SideMenu close={this.closeSideMenu} setHeaderTitle={this.setHeaderTitle} /> : ''}
-      <Route path="/rooms" component={RoomList}/>
       <Route path="/users" exact component={UserList}/>
       <Route path="/users/:user_id" component={UserInfo}/>
+      <Route path="/rooms/:room_id" component={Room}/>
+      <Route path="/rooms" exact component={RoomList}/>
       <Route path="/create-room" component={CreateRoom}/>
       <Route path="/" exact component={Welcome}/>
       <Route path="/signup" component={SignUp}/>

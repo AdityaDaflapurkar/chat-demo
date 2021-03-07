@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +40,7 @@ export default function RoomList(props) {
   return (
     <List className={classes.root}>
       {rooms.map(room => <>
-      <ListItem alignItems="flex-start">
+      <ListItem alignItems="flex-start" component={Link} to={'rooms/' + room._id} button={true}>
         <ListItemText
           primary={room.title}
           secondary={
