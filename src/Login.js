@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box';
 import { FormControl } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { useState } from 'react';
-import axios from 'axios';
+import { loginUser } from './service'
 
 const HELPER_TEXTS = {
   USERNAME_NOT_EMPTY: 'Username cannot be empty',
@@ -63,12 +63,7 @@ export default function Login() {
   };
 
   const onClickLogin = () => {
-    axios.post('http://localhost:5000/users/login', {
-      email: username,
-      password
-    }).then(res => {
-      console.log(res)
-    })
+    loginUser(username, password)
   };
 
   return (
