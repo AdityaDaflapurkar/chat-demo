@@ -50,6 +50,7 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+  console.log(res, 'resxxxx')
   const { errors, isValid } = validateLoginInput(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
@@ -73,9 +74,11 @@ router.post('/login', (req, res) => {
             expiresIn: 31556926,
           },
           (err, token) => {
+            console.log(user, 'xxxx')
             res.json({
               success: true,
               token: `Bearer ${token}`,
+              username: user.name
             });
           }
         );

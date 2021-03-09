@@ -1,7 +1,8 @@
 import './App.css';
 import Welcome from './Welcome';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route } from 'react-router-dom';
+import { ProtectedRoute } from './ProtectedRoute'
+import { Route } from 'react-router-dom'
 import React from 'react';
 import SignUp from './SignUp';
 import Login from './Login';
@@ -17,7 +18,18 @@ import { HEADER_TITLES, AppContext } from './constants';
 class App extends React.Component {
   state = {
     isSideMenuOpened: false,
-    headerTitle: HEADER_TITLES.HOME
+    headerTitle: HEADER_TITLES.HOME,
+    isLoggedIn: false,
+    username: null,
+    token: null
+  }
+
+  getAuth = () => {
+    return {
+      isLoggedIn: this.state.isLoggedIn,
+      username: this.state.username,
+      token: this.state.token
+    }
   }
 
   openSideMenu = () => {
@@ -32,6 +44,14 @@ class App extends React.Component {
     });
   };
 
+  setLoginInfo = ({isLoggedIn, username, token}) => {
+    this.setState({
+      isLoggedIn,
+      username,
+      token
+    })
+  }
+
   setHeaderTitle = headerTitle => {
     this.setState({
       headerTitle,
@@ -42,14 +62,14 @@ class App extends React.Component {
     const { isSideMenuOpened, headerTitle } = this.state;
   return (
     <div className="App"> 
+      <AppContext.Provider value={{setHeaderTitle: this.setHeaderTitle, getAuth: this.getAuth, setLoginInfo: this.setLoginInfo }}>
       <Header openSideMenu={this.openSideMenu} title={headerTitle}/>
-      <AppContext.Provider value={{setHeaderTitle: this.setHeaderTitle}}>
       {isSideMenuOpened ? <SideMenu close={this.closeSideMenu} /> : ''}
-      <Route path="/users" exact component={UserList}/>
-      <Route path="/users/:user_id" component={UserInfo}/>
-      <Route path="/rooms/:room_id" component={Room}/>
-      <Route path="/rooms" exact component={RoomList}/>
-      <Route path="/create-room" component={CreateRoom}/>
+      <ProtectedRoute path="/users" exact component={UserList}/>
+      <ProtectedRoute path="/users/:user_id" component={UserInfo}/>
+      <ProtectedRoute path="/rooms/:room_id" component={Room}/>
+      <ProtectedRoute path="/rooms" exact component={RoomList}/>
+      <ProtectedRoute path="/create-room" component={CreateRoom}/>
       <Route path="/" exact component={Welcome}/>
       <Route path="/signup" component={SignUp}/>
       <Route path="/login" component={Login}/>

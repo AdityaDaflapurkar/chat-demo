@@ -2,8 +2,9 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import { FormControl } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { loginUser } from './service'
+import { AppContext } from './constants'
 
 const HELPER_TEXTS = {
   USERNAME_NOT_EMPTY: 'Username cannot be empty',
@@ -15,14 +16,14 @@ const HELPER_TEXTS = {
   INVALID_USER: 'Invalid email or phone number',
 };
 
-export default function Login() {
+export default function Login(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [usernameHelperText, setUsernameHelperText] = useState('');
   const [passwordHelperText, setPasswordHelperText] = useState('');
-
+  const appContext = useContext(AppContext);
   const onUsernameChange = (event) => {
     setUsernameError(false);
     setUsernameHelperText(false);
@@ -63,7 +64,14 @@ export default function Login() {
   };
 
   const onClickLogin = () => {
-    loginUser(username, password)
+    loginUser(username, password).then(res => {
+      appContext.setLoginInfo({
+        isLoggedIn: true,
+        username: res.data.username,
+        token: res.data
+      })
+      console.log(res.data, 'res')
+    })
   };
 
   return (

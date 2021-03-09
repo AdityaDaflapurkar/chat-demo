@@ -16,4 +16,6 @@ export const HEADER_TITLES = {
   ROOMS: 'My rooms',
   USERS: 'View Users'
 }
-export const AppContext = React.createContext({});
+export const AppContext = React.createContext({
+  getAuth: () => ({})
+});
