@@ -26,6 +26,7 @@
     "start": "concurrently \"cd backend && node server.js\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**/*.{js,jsx,json}\"",
     "lint:fix": "eslint . --fix"
